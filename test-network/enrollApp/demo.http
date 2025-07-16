@@ -1,0 +1,64 @@
+@baseUrl = http://localhost:3000
+@adminToken = your-admin-token-here
+@userToken = your-user-token-here
+
+### Get API Documentation
+GET {{baseUrl}}
+
+### Login as Admin
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "userId": "admin",
+  "password": "adminpw"
+}
+
+### Register New User (Admin only)
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+  "userId": "user1",
+  "password": "user1password"
+}
+
+### Login as User
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "userId": "user1",
+  "password": "user1password"
+}
+
+### Get User Info
+GET {{baseUrl}}/api/auth/user
+Authorization: Bearer {{userToken}}
+
+### Store Data
+POST {{baseUrl}}/api/storage
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+
+{
+  "key": "test1",
+  "value": {
+    "name": "Test Data",
+    "description": "This is a test data object",
+    "timestamp": "2024-01-01T00:00:00Z"
+  }
+}
+
+### Get Data by Key
+GET {{baseUrl}}/api/storage/test1
+Authorization: Bearer {{userToken}}
+
+### List All Keys
+GET {{baseUrl}}/api/storage
+Authorization: Bearer {{userToken}}
+
+### Delete Data
+DELETE {{baseUrl}}/api/storage/test1
+Authorization: Bearer {{userToken}} 
