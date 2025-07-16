@@ -275,14 +275,14 @@ app.get('/api/files/:fileId', async (req, res) => {
 
         try {
             // Get file metadata from Fabric
-            const fileMetadata = await contract.evaluateTransaction('ReadFile', fileId);
+            const fileMetadata = await contract.evaluateTransaction('GetFile', fileId);
             const metadata = JSON.parse(fileMetadata.toString());
 
             // Get encrypted file from IPFS
             const encryptedData = await retrieveFromIPFS(metadata.ipfsCID);
 
             // Decrypt file
-            const key = Buffer.from(metadata.encryptionKeyID, 'hex');
+            const key = Buffer.from(metadata.encryptionKeyId, 'hex');
             const decryptedData = decryptFile(encryptedData, key);
 
             // Send file

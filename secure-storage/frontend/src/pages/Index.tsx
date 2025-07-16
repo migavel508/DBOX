@@ -78,7 +78,7 @@ const Index = () => {
 
   const handleDownload = async (file) => {
     try {
-      const blob = await api.downloadFile(file.id, userId);
+      const blob = await api.downloadFile(file.ipfsCID, userId);
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -192,7 +192,7 @@ const Index = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 {files.map((file) => (
-                  <div key={file.id} className="flex items-center justify-between p-4 bg-slate-700 rounded-lg">
+                  <div key={file.ipfsCID} className="flex items-center justify-between p-4 bg-slate-700 rounded-lg">
                     <div className="flex items-center gap-4">
                       <div className="p-2 bg-blue-600 rounded">
                         <FileText className="h-4 w-4 text-white" />

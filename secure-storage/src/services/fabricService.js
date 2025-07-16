@@ -88,7 +88,7 @@ class FabricService {
         try {
             const { contract, gateway } = await this.getContract(userId);
             try {
-                const result = await contract.evaluateTransaction('ReadFile', fileId);
+                const result = await contract.evaluateTransaction('GetFile', fileId);
                 return JSON.parse(result.toString());
             } finally {
                 gateway.disconnect();
